@@ -17,12 +17,13 @@ def schedule():
     games = gamefinder.get_data_frames()[0]
 
     # Get latest 10 games
-    games = games[['GAME_ID', 'GAME_DATE', 'MATCHUP']].head(10)
+    games = games[['GAME_ID', 'GAME_DATE', 'MATCHUP']].head(15)
     return render_template('schedule.html', games=games.to_dict(orient='records'))
 
 
 @app.route('/boxscore/<game_id>')
 def boxscore(game_id):
+
     boxscore = boxscoretraditionalv2.BoxScoreTraditionalV2(game_id=game_id)
     stats = boxscore.player_stats.get_data_frame()
     stats = stats[['TEAM_ABBREVIATION', 'PLAYER_NAME', 'MIN', 'PTS', 'AST', 'REB', 'FGM', 'FGA', 'FG_PCT',
@@ -46,7 +47,14 @@ def boxscore(game_id):
 
     stats['MIN'] = stats['MIN'].apply(format_minutes)
 
-    return render_template('boxscore.html', stats=stats.to_dict(orient='records'))
+    teams = {}
+    for _, row in stats.iterrows():
+        team = row['TEAM_ABBREVIATION']
+        if team not in teams:
+            teams[team] = []
+        teams[team].append(row.to_dict())  # Convert row to dict for easy use in template
+
+    return render_template('boxscore.html', teams=teams)
 
 
 

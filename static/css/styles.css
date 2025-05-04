@@ -1,0 +1,15 @@
+.center {
+    text-align: center;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+#player_name {
+    font-weight: bold;
+    color: black;
+    font-size: large;
+    font-family: 'math';
+}
