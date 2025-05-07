@@ -36,25 +36,28 @@
                 <tbody class="text-center">
                     {% for stat in players %}
                         <tr id="borders">
-                            <td id="player_name">{{ stat['PLAYER_NAME'] }}</td>
+                            <td id="player_name">
+                                <a href="{{ url_for('player_page', player_id=stat['PLAYER_ID']) }}"> {{ stat['PLAYER_NAME'] }}
+                                 </a>
+                            </td>
                             {% if stat['MIN'] == 'DNP' %}
                                 <td colspan="15">DNP - Coach's Decision</td>
                             {% else %}
                                 <td>{{ stat['MIN'] }}</td>
-                                <td>{{ stat['PTS'] }}</td>
-                                <td>{{ stat['AST'] }}</td>
-                                <td>{{ stat['REB'] }}</td>
-                                <td>{{ stat['FGM'] }} / {{ stat['FGA'] }}</td>
+                                <td>{{ stat['PTS'] | int }}</td>
+                                <td>{{ stat['AST'] | int }}</td>
+                                <td>{{ stat['REB'] | int }}</td>
+                                <td>{{ stat['FGM'] | int }} / {{ stat['FGA'] | int }}</td>
                                 <td>{{ (stat['FG_PCT'] * 100) | round(2) }}</td>
-                                <td>{{ stat['FG3M'] }} / {{ stat['FG3A'] }}</td>
+                                <td>{{ stat['FG3M'] | int }} / {{ stat['FG3A'] | int }}</td>
                                 <td>{{ (stat['FG3_PCT'] * 100) | round(2) }}</td>
-                                <td>{{ stat['FTM'] }} / {{ stat['FTA'] }}</td>
+                                <td>{{ stat['FTM'] | int }} / {{ stat['FTA'] | int }}</td>
                                 <td>{{ (stat['FT_PCT'] * 100) | round(2) }}</td>
-                                <td>{{ stat['STL'] }}</td>
-                                <td>{{ stat['BLK'] }}</td>
-                                <td>{{ stat['TO'] }}</td>
-                                <td>{{ stat['PF'] }}</td>
-                                <td>{{ stat['PLUS_MINUS'] }}</td>
+                                <td>{{ stat['STL'] | int }}</td>
+                                <td>{{ stat['BLK']| int }}</td>
+                                <td>{{ stat['TO'] | int }}</td>
+                                <td>{{ stat['PF'] | int}}</td>
+                                <td>{{ stat['PLUS_MINUS'] | int }}</td>
                             {% endif %}
                         </tr>
                     {% endfor %}

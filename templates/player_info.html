@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ info['DISPLAY_FIRST_LAST'] }}</h1>
+        <a href="/" class="btn btn-outline-secondary">⬅ Back</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Player Info</h5>
+                    <p><strong>Team:</strong> {{ info['TEAM_NAME'] }}</p>
+                    <p><strong>Position:</strong> {{ info['POSITION'] }}</p>
+                    <p><strong>Height:</strong> {{ info['HEIGHT'] }}</p>
+                    <p><strong>Weight:</strong> {{ info['WEIGHT'] }} lbs</p>
+                    <p><strong>College:</strong> {{ info['COLLEGE'] or "N/A" }}</p>
+                    <p><strong>Country:</strong> {{ info['COUNTRY'] }}</p>
+                    <p><strong>Years Pro:</strong> {{ info['SEASON_EXP'] }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Career Averages</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>PPG:</strong> {{ career_avg['PTS'] }}</li>
+                        <li class="list-group-item"><strong>APG:</strong> {{ career_avg['AST'] }}</li>
+                        <li class="list-group-item"><strong>RPG:</strong> {{ career_avg['REB'] }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if season_avg %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Last Season Averages ({{ season_avg['SEASON_ID'] }})</h5>
+                    <ul class="list-group list-group-horizontal-md">
+                        <li class="list-group-item"><strong>GP:</strong> {{ season_avg['GP'] }}</li>
+                        <li class="list-group-item"><strong>MIN:</strong> {{ (season_avg['MIN'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>PTS:</strong> {{ (season_avg['PTS'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>AST:</strong> {{ (season_avg['AST'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>REB:</strong> {{ (season_avg['REB'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>STL:</strong> {{ (season_avg['STL'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>BLK:</strong> {{ (season_avg['BLK'] / season_avg['GP']) | round(1) }}</li>
+                        <li class="list-group-item"><strong>TO:</strong> {{ (season_avg['TOV'] / season_avg['GP']) | round(1) }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

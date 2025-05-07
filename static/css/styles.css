@@ -1,7 +1,9 @@
 .center {
     text-align: center;
 }
-
+.margin-top {
+    margin-top: 1rem;
+}
 .header-flex {
     display: flex;
     justify-content: space-between;
@@ -12,4 +14,10 @@
     color: black;
     font-size: large;
     font-family: 'math';
+}
+
+tr, td, th {
+    border-style: none;!important;
+    border-bottom: 1px solid black;
+
 }

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Upcoming NBA Games</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    {% for game in games %}
+        <p>{{ game['home_team']['full_name'] }} vs {{ game['visitor_team']['full_name'] }} on {{ game['date'][:10] }}</p>
+    {% endfor %}
+    <a href="/">Back to Home</a>
+
+{% endblock %}
+
